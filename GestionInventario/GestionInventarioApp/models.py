@@ -21,7 +21,7 @@ class Producto (models.Model):
     categoria = models.ManyToManyField(Categoria)
     price = models.FloatField()
     cantidad = models.IntegerField()
-    codigo_costo = models.CharField(choices= codigos_costo)
+    codigo_costo = models.CharField(choices= codigos_costo, max_length=25)
     created = models.DateField(auto_now_add=True)
     updated = models.DateField(auto_now_add=True)
 
