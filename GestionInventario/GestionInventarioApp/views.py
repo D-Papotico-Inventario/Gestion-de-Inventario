@@ -12,3 +12,8 @@ def categoria(request):
 def precio(request):
     data = models.Producto.objects.filter().order_by('price')
     return render (request,'Gestion/gestion.html',{'data':data})
+
+def search(request):
+    data = request.GET['search']
+    data = models.Producto.objects.filter(name__icontains = data)
+    return render(request,"Gestion/gestion.html",{"data":data})
