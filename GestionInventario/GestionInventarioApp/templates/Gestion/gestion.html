@@ -13,6 +13,17 @@
     {% block content %}
     <h1>PRODUCTOS</h1>
     <button class="b-agregar">Nuevo +</button>
+      <div class="dropdown" style="float: right;margin-right: 1rem;">
+        <a class="btn btn-secondary dropdown-toggle b-agregar" style="border-radius: 0%;" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Filtros
+        </a>
+      
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="{% url 'categoria' %}">Categoria</a></li>
+          <li><a class="dropdown-item" href="{% url 'precio' %}">Precio</a></li>
+          <li><a class="dropdown-item" href="#">Tiempo</a></li>
+        </ul>
+      </div>
     <table>
         <tr>
           <th>ID</th>
