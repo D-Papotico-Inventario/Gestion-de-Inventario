@@ -11,19 +11,39 @@
 </head>
 <body>
     {% block content %}
-    <h1>PRODUCTOS</h1>
-    <button class="b-agregar">Nuevo +</button>
-      <div class="dropdown" style="float: right;margin-right: 1rem;">
-        <a class="btn btn-secondary dropdown-toggle b-agregar" style="border-radius: 0%;" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          Filtros
-        </a>
-      
-        <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="{% url 'categoria' %}">Categoria</a></li>
-          <li><a class="dropdown-item" href="{% url 'precio' %}">Precio</a></li>
-          <li><a class="dropdown-item" href="#">Tiempo</a></li>
-        </ul>
+    <h1><strong>PRODUCTOS</strong></h1>
+    <div>
+      {% if "producto_guardado" in request.GET %}
+      <div class="alert alert-warning alert-dismissible fade show" role="alert" >
+        <strong>Producto Guardado correctamente</strong> 
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
+      {% endif %}
+      {% if "producto_actualizado" in request.GET %}
+      <div class="alert alert-warning alert-dismissible fade show" role="alert" >
+        <strong>Producto actualizado correctamente</strong> 
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      {% endif %}
+      {% if "producto_eliminado" in request.GET %}
+      <div class="alert alert-warning alert-dismissible fade show" role="alert" >
+        <strong>Producto eliminado correctamente</strong> 
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      {% endif %}
+    </div>
+    <a class="b-agregar" href="{% url 'add' %}" style="text-decoration: none; float: left;">Nuevo +</a>
+    <div class="dropdown" style="float: right;margin-right: 1rem;">
+      <a class=" b-agregar btn btn-secondary dropdown-toggle" style="border-radius: 0%; margin-bottom: 1rem; " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Filtros
+      </a>
+    
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="{% url 'categoria' %}">Categoria</a></li>
+        <li><a class="dropdown-item" href="{% url 'precio' %}">Precio</a></li>
+        <li><a class="dropdown-item" href="{% url 'tiempo' %}">Tiempo</a></li>
+      </ul>
+    </div>
     <table>
         <tr>
           <th>ID</th>
@@ -32,21 +52,30 @@
           <th>Precio de venta</th>
           <th>Cantidad</th>
           <th>Codigo de costo</th>
-          <th>Editar</th>
+          <th>Editar o ver</th>
           <th>Eliminar</th>
         </tr>
-        {% for data in data %}
-        <tr>
-          <td>ID</td>
-          <td>{{data.name}}</td>
-          <td>{{data.categoria}}</td>
-          <td>{{data.price}}</td>
-          <td>{{data.cantidad}}</td>
-          <td>{{data.codigo_costo}}</td>
-          <td><button class = 'check'>☑</button></td>
-          <td><button class = 'wrong'>☒</button></td>
-        </tr>
-        {% endfor %}
+        {% if data %}
+          {% for data in data %}
+          <tr>
+            <td>{{data.id}}</td>
+            <td>{{data.name}}</td>
+            {% for ctg in data.categoria.all %}
+            <td>{{ctg.name}}</td>
+            {% endfor %}
+            <td>{{data.price}}</td>
+            <td>{{data.cantidad}}</td>
+            <td>{{data.codigo_costo}}</td>
+            <td><a href="{% url 'editar' data.id %}" class = 'check'>☑</a></td>
+            <td><a href="{% url 'eliminar' data.id %}" class = 'wrong'>☒</a></td>
+          </tr>
+          {% endfor %}
+
+        {% else %}
+          <tr>
+            <td><strong >NO HAY PRODUCTOS</strong></td>
+          </tr>
+        {% endif %}
       </table>
       {% endblock %}
 </body>

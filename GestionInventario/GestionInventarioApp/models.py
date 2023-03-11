@@ -7,7 +7,7 @@ class Categoria (models.Model):
     created = models.DateField(auto_now_add=True)
     updated = models.DateField(auto_now_add=True)
     def __str__(self):
-     return self.name
+        return self.name
     
 class Producto (models.Model): 
     name = models.CharField(max_length=30)

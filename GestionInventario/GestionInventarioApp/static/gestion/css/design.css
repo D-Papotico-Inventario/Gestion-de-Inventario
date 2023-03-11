@@ -90,6 +90,7 @@ h1{
     padding: 10px 20px;
     cursor: cell;
     margin-left: 15px;
+    height: 3rem;
 }
 
 .b-agregar:hover{
@@ -144,4 +145,33 @@ th {
 
 tr:nth-child(even) {
     background-color: #efebeb;
+}
+
+.forms{
+    width: 50%;
+    margin: auto;
+    margin-top: 3rem;
+
+}
+
+.form-group{
+    margin: 1rem;
+}
+
+.requiredField{
+    text-decoration: none;
+    font-weight: 700;
+    font-size: large;
+}
+
+.asteriskField {
+    display: none;
+}
+
+.alert{
+    width: 50%;
+    margin: auto;
+    background-color: #48aac3;
+    color: white;
+    border-color: transparent;
 }
